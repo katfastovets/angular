@@ -71,11 +71,15 @@ nastya.absent();
 nastya.absent();
 var vasya = new Student('vasya', 'pupkin', 1990);
 vasya.marks.push(90, 80, 45, 45, 90);
+//create array of students
 var Group = /** @class */ (function (_super) {
     __extends(Group, _super);
-    function Group() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Group(items) {
+        return _super.apply(this, items) || this;
     }
+    Group.create = function () {
+        return Object.create(Group.prototype);
+    };
     Group.prototype.average = function (methodName, surname) {
         if (surname) {
             var sortedGroup = this.slice();
@@ -98,8 +102,8 @@ var Group = /** @class */ (function (_super) {
         return this.average('marksAverage', surname);
     };
     return Group;
-}([]));
-var group = new Group();
+}(Array));
+var group = Group.create();
 group.push(kate, nastya, vasya);
 console.log(group);
 console.log(group.attendance('pupkin'));

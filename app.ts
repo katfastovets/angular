@@ -63,8 +63,15 @@ nastya.absent();
 let vasya = new Student('vasya', 'pupkin', 1990);
 vasya.marks.push(90, 80, 45, 45, 90);
 
-class Group extends [] {
-	average(methodName: string,
+//create array of students
+class Group<T> extends Array<T> {
+	private constructor(items?: Array<T>) {
+        super(...items)
+    }
+    static create<T>(): Group<T> {
+        return Object.create(Group.prototype);
+    }
+ 	average(methodName: string,
 			surname: string) {
 		if (surname) {
 			let sortedGroup = this.slice();
@@ -86,7 +93,7 @@ class Group extends [] {
 		return this.average('marksAverage', surname);
 	}
 }
-let group = new Group();
+let group = Group.create();
 group.push(kate, nastya, vasya);
 console.log(group);
 console.log(group.attendance('pupkin'));
